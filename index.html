@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RFET - Réseau des Femmes Entrepreneures du Tchad</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
+    
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--blue:#2B4C9F;--yellow:#FFD700;--red:#E74C3C;--dark:#1a1a1a;--light:#f8f9fa}
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;overflow-x:hidden;color:#333;line-height:1.6}
@@ -19,8 +22,85 @@ nav a{color:#333;text-decoration:none;transition:all 0.3s;position:relative;padd
 nav a:hover{color:var(--blue)}
 nav a:after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--yellow);transition:width 0.3s}
 nav a:hover:after{width:100%}
-.lang-switcher{background:var(--blue);color:white;border:none;padding:10px 20px;border-radius:25px;cursor:pointer;font-size:14px;font-weight:bold;transition:all 0.3s;box-shadow:0 4px 15px rgba(43,76,159,0.3)}
-.lang-switcher:hover{background:var(--yellow);color:var(--blue);transform:translateY(-2px)}
+
+/* Styles pour le sélecteur de langue */
+.lang-selector {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-switcher {
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(43,76,159,0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.lang-switcher:hover {
+    background: var(--yellow);
+    color: var(--blue);
+    transform: translateY(-2px);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    margin-top: 5px;
+}
+
+.lang-selector:hover .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-option {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: #333;
+}
+
+.lang-option:last-child {
+    border-bottom: none;
+}
+
+.lang-option:hover {
+    background: var(--light);
+    color: var(--blue);
+}
+
+.lang-option.active {
+    background: var(--blue);
+    color: white;
+}
+
 .hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .hero-slider{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
 .hero-slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 1.5s;background-size:cover;background-position:center}
@@ -96,6 +176,41 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 .back-to-top.visible{opacity:1}
 .back-to-top:hover{transform:translateY(-8px)}
 @media(max-width:768px){nav{padding:15px 20px;flex-direction:column;gap:15px}nav ul{flex-wrap:wrap;justify-content:center;gap:15px}.hero h1{font-size:38px}.hero p{font-size:18px}section{padding:60px 20px}.about-content,.contact-grid,.footer-content{grid-template-columns:1fr}.projects-grid,.objectives-grid{grid-template-columns:1fr}.section-title{font-size:36px}}
+
+/* Styles pour l'arabe */
+.ar {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ar .section-title:after {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.ar .contact-item:hover {
+    transform: translateX(-10px);
+}
+
+.ar .footer-links a:hover {
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+/* Styles responsifs pour le sélecteur de langue */
+@media (max-width: 768px) {
+    .lang-selector {
+        margin-top: 10px;
+    }
+    
+    .lang-dropdown {
+        right: auto;
+        left: 0;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -105,18 +220,42 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
     <img src="img/logo.png" alt="Logo RFET">
     <div class="logo-text">
       <span class="logo-main">RFET</span>
-      <span class="logo-sub">Réseau des Femmes Entrepreneures du Tchad</span>
+      <span class="logo-sub fr">Réseau des Femmes Entrepreneures du Tchad</span>
+      <span class="logo-sub en" style="display:none">Network of Women Entrepreneurs of Chad</span>
+      <span class="logo-sub ar" style="display:none">شبكة رائدات الأعمال في تشاد</span>
     </div>
   </div>
   <ul>
-    <li><a href="#accueil" class="fr">Accueil</a><a href="#accueil" class="en" style="display:none">Home</a></li>
-    <li><a href="#apropos" class="fr">À propos</a><a href="#apropos" class="en" style="display:none">About</a></li>
-    <li><a href="#projets" class="fr">Projets</a><a href="#projets" class="en" style="display:none">Projects</a></li>
-    <li><a href="#objectifs" class="fr">Objectifs</a><a href="#objectifs" class="en" style="display:none">Objectives</a></li>
-    <li><a href="#impact" class="fr">Impact</a><a href="#impact" class="en" style="display:none">Impact</a></li>
-    <li><a href="#partenaires" class="fr">Partenaires</a><a href="#partenaires" class="en" style="display:none">Partners</a></li>
-    <li><a href="#contact" class="fr">Contact</a><a href="#contact" class="en" style="display:none">Contact</a></li>
-    <li><button class="lang-switcher" onclick="toggleLang()">🇬🇧 EN</button></li>
+    <li><a href="#accueil" class="fr">Accueil</a><a href="#accueil" class="en" style="display:none">Home</a><a href="#accueil" class="ar" style="display:none">الرئيسية</a></li>
+    <li><a href="#apropos" class="fr">À propos</a><a href="#apropos" class="en" style="display:none">About</a><a href="#apropos" class="ar" style="display:none">من نحن</a></li>
+    <li><a href="#projets" class="fr">Projets</a><a href="#projets" class="en" style="display:none">Projects</a><a href="#projets" class="ar" style="display:none">المشاريع</a></li>
+    <li><a href="#objectifs" class="fr">Objectifs</a><a href="#objectifs" class="en" style="display:none">Objectives</a><a href="#objectifs" class="ar" style="display:none">الأهداف</a></li>
+    <li><a href="#impact" class="fr">Impact</a><a href="#impact" class="en" style="display:none">Impact</a><a href="#impact" class="ar" style="display:none">التأثير</a></li>
+    <li><a href="#partenaires" class="fr">Partenaires</a><a href="#partenaires" class="en" style="display:none">Partners</a><a href="#partenaires" class="ar" style="display:none">الشركاء</a></li>
+    <li><a href="#contact" class="fr">Contact</a><a href="#contact" class="en" style="display:none">Contact</a><a href="#contact" class="ar" style="display:none">اتصل بنا</a></li>
+    <li>
+        <div class="lang-selector">
+            <button class="lang-switcher">
+                <span class="current-flag">🇫🇷</span>
+                <span class="current-lang">FR</span>
+                <span style="font-size:12px">▼</span>
+            </button>
+            <div class="lang-dropdown">
+                <a href="#" class="lang-option active" data-lang="fr" onclick="changeLanguage('fr')">
+                    <span>🇫🇷</span>
+                    <span>Français</span>
+                </a>
+                <a href="#" class="lang-option" data-lang="en" onclick="changeLanguage('en')">
+                    <span>🇬🇧</span>
+                    <span>English</span>
+                </a>
+                <a href="#" class="lang-option" data-lang="ar" onclick="changeLanguage('ar')">
+                    <span>🇸🇦</span>
+                    <span>العربية</span>
+                </a>
+            </div>
+        </div>
+    </li>
   </ul>
 </nav>
 
@@ -129,32 +268,42 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 <div class="hero-content">
 <h1 class="fr">Ensemble pour l'Autonomisation Économique des Femmes au Tchad</h1>
 <h1 class="en" style="display:none">Together for Women's Economic Empowerment in Chad</h1>
+<h1 class="ar" style="display:none">معًا لتمكين المرأة اقتصاديًا في تشاد</h1>
 <p class="fr">Promouvoir un développement durable à travers l'entrepreneuriat, la formation professionnelle et l'innovation numérique</p>
 <p class="en" style="display:none">Promoting sustainable development through entrepreneurship, professional training and digital innovation</p>
+<p class="ar" style="display:none">تعزيز التنمية المستدامة من خلال ريادة الأعمال والتدريب المهني والابتكار الرقمي</p>
 <a href="#apropos" class="btn-primary fr">Découvrir notre mission</a>
 <a href="#apropos" class="btn-primary en" style="display:none">Discover our mission</a>
+<a href="#apropos" class="btn-primary ar" style="display:none">اكتشف مهمتنا</a>
 </div>
 </section>
 
 <section id="apropos">
 <h2 class="section-title fr">À Propos du RFET</h2>
 <h2 class="section-title en" style="display:none">About RFET</h2>
+<h2 class="section-title ar" style="display:none">عن RFET</h2>
 <div class="about-content">
 <div class="about-text">
 <h3 class="fr">Notre Mission</h3>
 <h3 class="en" style="display:none">Our Mission</h3>
+<h3 class="ar" style="display:none">مهمتنا</h3>
 <p class="fr">Le Réseau des Femmes Entrepreneures du Tchad (RFET) est une organisation à but non lucratif dédiée à l'autonomisation économique des femmes tchadiennes. Nous œuvrons pour créer un écosystème favorable au développement de l'entrepreneuriat féminin dans les secteurs du commerce et de l'industrie.</p>
 <p class="en" style="display:none">The Network of Women Entrepreneurs of Chad (RFET) is a non-profit organization dedicated to the economic empowerment of Chadian women. We work to create a favorable ecosystem for the development of women's entrepreneurship in the trade and industry sectors.</p>
+<p class="ar" style="display:none">شبكة رائدات الأعمال في تشاد (RFET) هي منظمة غير ربحية مكرسة لتمكين المرأة التشادية اقتصاديًا. نحن نعمل على خلق بيئة مواتية لتطوير ريادة الأعمال النسائية في قطاعي التجارة والصناعة.</p>
 
 <h3 class="fr">Notre Vision</h3>
 <h3 class="en" style="display:none">Our Vision</h3>
+<h3 class="ar" style="display:none">رؤيتنا</h3>
 <p class="fr">Devenir le réseau de référence pour l'entrepreneuriat féminin au Tchad, contribuant significativement au développement économique et social du pays en facilitant l'accès aux financements, en renforçant les capacités managériales et en promouvant le Made in Chad.</p>
 <p class="en" style="display:none">To become the reference network for women's entrepreneurship in Chad, significantly contributing to the country's economic and social development by facilitating access to financing, strengthening managerial capacities and promoting Made in Chad.</p>
+<p class="ar" style="display:none">أن نصبح الشبكة المرجعية لريادة الأعمال النسائية في تشاد، ونشارك بشكل كبير في التنمية الاقتصادية والاجتماعية للبلاد من خلال تسهيل الوصول إلى التمويل، وتعزيز القدرات الإدارية والترويج لمنتجات "صنع في تشاد".</p>
 
 <h3 class="fr">Nos Valeurs</h3>
 <h3 class="en" style="display:none">Our Values</h3>
+<h3 class="ar" style="display:none">قيمنا</h3>
 <p class="fr">Excellence, Solidarité, Innovation, Transparence et Engagement pour l'autonomisation des femmes entrepreneures à travers tout le Tchad.</p>
 <p class="en" style="display:none">Excellence, Solidarity, Innovation, Transparency and Commitment to the empowerment of women entrepreneurs throughout Chad.</p>
+<p class="ar" style="display:none">التميز، التضامن، الابتكار، الشفافية والالتزام بتمكين رائدات الأعمال في جميع أنحاء تشاد.</p>
 </div>
 <div class="about-image">👩‍💼</div>
 </div>
@@ -163,20 +312,23 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 <section id="projets">
 <h2 class="section-title fr">Nos Projets</h2>
 <h2 class="section-title en" style="display:none">Our Projects</h2>
+<h2 class="section-title ar" style="display:none">مشاريعنا</h2>
 <div class="projects-grid">
 <div class="project-card">
 <div class="project-image">🌾</div>
 <div class="project-content">
 <span class="project-number fr">PROJET</span>
 <span class="project-number en" style="display:none">PROJECT</span>
+<span class="project-number ar" style="display:none">مشروع</span>
 <h3 class="fr">Agriculture & Agro-alimentaire</h3>
 <h3 class="en" style="display:none">Agriculture & Agribusiness</h3>
+<h3 class="ar" style="display:none">الزراعة والصناعات الغذائية</h3>
 <p class="fr">Renforcement des capacités agricoles et promotion des filières agro-alimentaires durables pour les femmes entrepreneures. Support aux activités de transformation et commercialisation des produits locaux.</p>
 <p class="en" style="display:none">Strengthening agricultural capacities and promoting sustainable agribusiness value chains for women entrepreneurs. Support for processing and marketing activities of local products.</p>
+<p class="ar" style="display:none">تعزيز القدرات الزراعية والترويج لسلاسل القيمة الزراعية المستدامة لرائدات الأعمال. دعم أنشطة تحويل وتسويق المنتجات المحلية.</p>
 <p class="fr"><strong>Secteur :</strong> Commerce et Industrie</p>
 <p class="en" style="display:none"><strong>Sector:</strong> Trade and Industry</p>
-<!-- <p class="fr"><strong>Localisation :</strong> DJAMBAL BAHR, N'Djamena</p>
-<p class="en" style="display:none"><strong>Location:</strong> DJAMBAL BAHR, N'Djamena</p> -->
+<p class="ar" style="display:none"><strong>القطاع:</strong> التجارة والصناعة</p>
 </div>
 </div>
 <div class="project-card">
@@ -184,109 +336,96 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 <div class="project-content">
 <span class="project-number fr">PROJET</span>
 <span class="project-number en" style="display:none">PROJECT</span>
+<span class="project-number ar" style="display:none">مشروع</span>
 <h3 class="fr">Formation & Leadership</h3>
 <h3 class="en" style="display:none">Training & Leadership</h3>
+<h3 class="ar" style="display:none">التدريب والقيادة</h3>
 <p class="fr">Formation de 1000 femmes entrepreneures dans la gestion, le leadership et le numérique pour renforcer leurs compétences professionnelles et managériales.</p>
 <p class="en" style="display:none">Training of 1000 women entrepreneurs in management, leadership and digital skills to strengthen their professional and managerial skills.</p>
+<p class="ar" style="display:none">تدريب 1000 رائدة أعمال في الإدارة والقيادة والمهارات الرقمية لتعزيز مهاراتهن المهنية والإدارية.</p>
 <p class="fr"><strong>Cible :</strong> 1000 femmes entrepreneures</p>
 <p class="en" style="display:none"><strong>Target:</strong> 1000 women entrepreneurs</p>
+<p class="ar" style="display:none"><strong>الهدف:</strong> 1000 رائدة أعمال</p>
 <p class="fr"><strong>Thématiques :</strong> Gestion, Leadership, Numérique</p>
 <p class="en" style="display:none"><strong>Themes:</strong> Management, Leadership, Digital</p>
+<p class="ar" style="display:none"><strong>المحاور:</strong> الإدارة، القيادة، الرقمية</p>
 </div>
 </div>
-<!-- <div class="project-card">
-<div class="project-image">💰</div>
-<div class="project-content">
-<span class="project-number fr">PROJET 114</span>
-<span class="project-number en" style="display:none">PROJECT 114</span>
-<h3 class="fr">Accès au Financement</h3>
-<h3 class="en" style="display:none">Access to Financing</h3>
-<p class="fr">Facilitation de l'accès aux financements avec un budget de 1,5 milliard FCFA pour soutenir 200 projets féminins accompagnés.</p>
-<p class="en" style="display:none">Facilitating access to financing with a budget of 1.5 billion FCFA to support 200 women-led projects.</p>
-<p class="fr"><strong>Budget :</strong> 1 505 000 000 FCFA</p>
-<p class="en" style="display:none"><strong>Budget:</strong> 1,505,000,000 FCFA</p>
-<p class="fr"><strong>Fonds propres :</strong> 5 000 000 FCFA</p>
-<p class="en" style="display:none"><strong>Equity:</strong> 5,000,000 FCFA</p>
-<p class="fr"><strong>Financement à mobiliser :</strong> 1 500 000 000 FCFA</p>
-<p class="en" style="display:none"><strong>Funding to mobilize:</strong> 1,500,000,000 FCFA</p>
-</div>
-</div>-->
 </div> 
-
 </section>
 
 <section id="objectifs">
 <h2 class="section-title fr">Nos Objectifs</h2>
 <h2 class="section-title en" style="display:none">Our Objectives</h2>
+<h2 class="section-title ar" style="display:none">أهدافنا</h2>
 <div class="objectives-grid">
 <div class="objective-card">
 <div class="objective-icon">🎓</div>
 <h3 class="fr">Formation</h3>
 <h3 class="en" style="display:none">Training</h3>
+<h3 class="ar" style="display:none">التدريب</h3>
 <p class="fr">Renforcer les capacités de 1000 femmes entrepreneures dans la gestion, le leadership et le numérique</p>
 <p class="en" style="display:none">Strengthen the capacities of 1000 women entrepreneurs in management, leadership and digital skills</p>
+<p class="ar" style="display:none">تعزيز قدرات 1000 رائدة أعمال في الإدارة والقيادة والمهارات الرقمية</p>
 </div>
-<!-- <div class="objective-card">
-<div class="objective-icon">💳</div>
-<h3 class="fr">Financement</h3>
-<h3 class="en" style="display:none">Financing</h3>
-<p class="fr">Faciliter l'accès aux financements pour les entrepreneures et financer 200 projets féminins</p>
-<p class="en" style="display:none">Facilitate access to financing for entrepreneurs and fund 200 women-led projects</p>
-</div> -->
 <div class="objective-card">
 <div class="objective-icon">🏢</div>
 <h3 class="fr">Structuration</h3>
 <h3 class="en" style="display:none">Structuring</h3>
+<h3 class="ar" style="display:none">الهيكلة</h3>
 <p class="fr">Structurer et dynamiser le RFET en créant 10 plateformes régionales de femmes entrepreneures</p>
 <p class="en" style="display:none">Structure and energize RFET by creating 10 regional platforms for women entrepreneurs</p>
+<p class="ar" style="display:none">هيكلة وتنشيط RFET من خلال إنشاء 10 منصات إقليمية لرائدات الأعمال</p>
 </div>
 <div class="objective-card">
 <div class="objective-icon">🇹🇩</div>
 <h3 class="fr">Made in Chad</h3>
 <h3 class="en" style="display:none">Made in Chad</h3>
+<h3 class="ar" style="display:none">صنع في تشاد</h3>
 <p class="fr">Promouvoir le Made in Chad par l'appui aux filières agro-alimentaires, artisanales et numériques</p>
 <p class="en" style="display:none">Promote Made in Chad by supporting agribusiness, craft and digital sectors</p>
+<p class="ar" style="display:none">الترويج لمنتجات "صنع في تشاد" من خلال دعم قطاعات الصناعات الغذائية والحرفية والرقمية</p>
 </div>
 <div class="objective-card">
 <div class="objective-icon">👥</div>
 <h3 class="fr">Emplois</h3>
 <h3 class="en" style="display:none">Jobs</h3>
+<h3 class="ar" style="display:none">الوظائف</h3>
 <p class="fr">Créer plus de 5000 emplois directs et indirects à travers les projets soutenus</p>
 <p class="en" style="display:none">Create more than 5000 direct and indirect jobs through supported projects</p>
+<p class="ar" style="display:none">خلق أكثر من 5000 وظيفة مباشرة وغير مباشرة من خلال المشاريع المدعومة</p>
 </div>
-<!-- <div class="objective-card">
-<div class="objective-icon">📊</div>
-<h3 class="fr">Suivi-Évaluation PND</h3>
-<h3 class="en" style="display:none">PND Monitoring</h3>
-<p class="fr">Assurer la participation des femmes au suivi-évaluation du Plan National de Développement dans au moins 6 régions du pays</p>
-<p class="en" style="display:none">Ensure women's participation in the monitoring and evaluation of the National Development Plan in at least 6 regions of the country</p>
-</div> -->
 </div>
 </section>
 
 <section id="impact" class="impact-section">
 <h2 class="impact-title fr">Notre Impact Attendu</h2>
 <h2 class="impact-title en" style="display:none">Our Expected Impact</h2>
+<h2 class="impact-title ar" style="display:none">التأثير المتوقع</h2>
 <div class="impact-grid">
 <div class="impact-item">
 <div class="impact-number">1000</div>
 <div class="impact-label fr">Femmes formées</div>
 <div class="impact-label en" style="display:none">Women trained</div>
+<div class="impact-label ar" style="display:none">امرأة مدربة</div>
 </div>
 <div class="impact-item">
 <div class="impact-number">200</div>
 <div class="impact-label fr">Projets financés</div>
 <div class="impact-label en" style="display:none">Projects funded</div>
+<div class="impact-label ar" style="display:none">مشروع ممول</div>
 </div>
 <div class="impact-item">
 <div class="impact-number">5000+</div>
 <div class="impact-label fr">Emplois créés</div>
 <div class="impact-label en" style="display:none">Jobs created</div>
+<div class="impact-label ar" style="display:none">وظيفة مخلوقة</div>
 </div>
 <div class="impact-item">
 <div class="impact-number">10</div>
 <div class="impact-label fr">Plateformes régionales</div>
 <div class="impact-label en" style="display:none">Regional platforms</div>
+<div class="impact-label ar" style="display:none">منصة إقليمية</div>
 </div>
 </div>
 </section>
@@ -294,99 +433,190 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 <section id="partenaires">
 <h2 class="section-title fr">Nos Partenaires</h2>
 <h2 class="section-title en" style="display:none">Our Partners</h2>
+<h2 class="section-title ar" style="display:none">شركاؤنا</h2>
 <p class="fr" style="text-align:center;max-width:800px;margin:0 auto 50px;font-size:18px;color:#666">Nous collaborons avec des investisseurs, banques et institutions pour soutenir l'entrepreneuriat féminin</p>
 <p class="en" style="text-align:center;max-width:800px;margin:0 auto 50px;font-size:18px;color:#666;display:none">We collaborate with investors, banks and institutions to support women's entrepreneurship</p>
+<p class="ar" style="text-align:center;max-width:800px;margin:0 auto 50px;font-size:18px;color:#666;display:none">نحن نتعاون مع المستثمرين والمصارف والمؤسسات لدعم ريادة الأعمال النسائية</p>
 <div class="partners-slider">
 <div class="partners-track">
 <div class="partner-item fr">Investisseurs Privés</div>
 <div class="partner-item en" style="display:none">Private Investors</div>
+<div class="partner-item ar" style="display:none">مستثمرون خاصون</div>
 <div class="partner-item fr">Banques Commerciales</div>
 <div class="partner-item en" style="display:none">Commercial Banks</div>
+<div class="partner-item ar" style="display:none">مصارف تجارية</div>
 <div class="partner-item fr">Institutions Financières Internationales</div>
 <div class="partner-item en" style="display:none">International Financial Institutions</div>
+<div class="partner-item ar" style="display:none">مؤسسات مالية دولية</div>
 <div class="partner-item fr">Fonds d'Investissement</div>
 <div class="partner-item en" style="display:none">Investment Funds</div>
+<div class="partner-item ar" style="display:none">صناديق الاستثمار</div>
 <div class="partner-item fr">Ministère des Finances</div>
 <div class="partner-item en" style="display:none">Ministry of Finance</div>
+<div class="partner-item ar" style="display:none">وزارة المالية</div>
 <div class="partner-item fr">Partenaires Techniques</div>
 <div class="partner-item en" style="display:none">Technical Partners</div>
+<div class="partner-item ar" style="display:none">شركاء تقنيون</div>
 </div>
 </div>
 </section>
+
 
 <section id="contact" style="padding: 80px 0; background: #f9f9f9;">
     <div class="container" style="max-width: 1100px; margin: auto;">
         <div class="row text-center mb-5">
             <div class="col">
                 <h2 class="section-title fr" style="font-size: 36px; color: #2B4C9F; font-weight: bold;">Contactez-nous</h2>
-                <h2 class="section-title en" style="display: none;">Contact Us</h2>
+                <h2 class="section-title en" style="display: none; font-size: 36px; color: #2B4C9F; font-weight: bold;">Contact Us</h2>
+                <h2 class="section-title ar" style="display: none; font-size: 36px; color: #2B4C9F; font-weight: bold;">اتصل بنا</h2>
             </div>
         </div>
 
-        <div class="row" style="display: flex; flex-wrap: wrap; gap: 30px;">
+        <div class="row" style="display: flex; flex-wrap: wrap; gap: 30px; align-items: stretch;">
             <!-- Colonne gauche : Informations -->
             <div class="col-md-6" style="flex: 1; min-width: 300px;">
-                <div class="contact-info" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <div class="contact-info" style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column;">
                     
-                    <div class="contact-item" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
-                        <i class="fas fa-map-marker-alt" style="font-size: 24px; color: #2B4C9F; margin-right: 15px;"></i>
+                    <div class="contact-item" style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 24px; color: #2B4C9F; margin-right: 15px; min-width: 24px;"></i>
                         <div>
-                            <h5 class="fr" style="margin: 0; color: #2B4C9F;">Adresse</h5>
-                            <h5 class="en" style="display:none;">Address</h5>
-                            <p style="margin: 0;">DJAMBAL BAHR, 3e Arrondissement</p>
-                            <p style="margin: 0;">Commune NDJAMENA 496, Avenue de Béhagle</p>
-                            <p style="margin: 0;">BP: 5748 N'Djamena, Tchad</p>
+                            <h5 class="fr" style="margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">Adresse</h5>
+                            <h5 class="en" style="display:none; margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">Address</h5>
+                            <h5 class="ar" style="display:none; margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">العنوان</h5>
+                            <p style="margin: 0; color: #555;">DJAMBAL BAHR, 3e Arrondissement</p>
+                            <p style="margin: 5px 0; color: #555;">Commune NDJAMENA 496, Avenue de Béhagle</p>
+                            <p style="margin: 0; color: #555;">BP: 5748 N'Djamena, Tchad</p>
                         </div>
                     </div>
 
-                    <div class="contact-item" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
-                        <i class="fas fa-phone" style="font-size: 24px; color: #2B4C9F; margin-right: 15px;"></i>
+                    <div class="contact-item" style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+                        <i class="fas fa-phone" style="font-size: 24px; color: #2B4C9F; margin-right: 15px; min-width: 24px;"></i>
                         <div>
-                            <h5 class="fr" style="margin: 0; color: #2B4C9F;">Téléphone</h5>
-                            <h5 class="en" style="display:none;">Phone</h5>
-                            <p style="margin: 0;">+235 66 27 11 03</p>
-                            <p style="margin: 0;">+235 99 90 55 12</p>
+                            <h5 class="fr" style="margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">Téléphone</h5>
+                            <h5 class="en" style="display:none; margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">Phone</h5>
+                            <h5 class="ar" style="display:none; margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">الهاتف</h5>
+                            <p style="margin: 0; color: #555;">+235 66 27 11 03</p>
+                            <p style="margin: 5px 0 0 0; color: #555;">+235 99 90 55 12</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item" style="display: flex; align-items: flex-start; margin-bottom: 30px;">
+                        <i class="fas fa-envelope" style="font-size: 24px; color: #2B4C9F; margin-right: 15px; min-width: 24px;"></i>
+                        <div>
+                            <h5 class="fr" style="margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">Email</h5>
+                            <h5 class="en" style="display:none; margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">Email</h5>
+                            <h5 class="ar" style="display:none; margin: 0 0 8px 0; color: #2B4C9F; font-size: 18px;">البريد الإلكتروني</h5>
+                            <p style="margin: 0;">
+                                <a href="mailto:bureau@rfet-td.org" style="text-decoration: none; color: #2B4C9F; font-weight: 500;">bureau@rfet-td.org</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Section Connecter avec nous -->
+                    <div style="margin-top: auto; padding-top: 30px; border-top: 1px solid #eee;">
+                        <h5 class="fr" style="color: #2B4C9F; font-size: 20px; margin-bottom: 20px; text-align: center;">Connecter avec nous</h5>
+                        <h5 class="en" style="color: #2B4C9F; font-size: 20px; margin-bottom: 20px; text-align: center; display: none;">Connect with us</h5>
+                        <h5 class="ar" style="color: #2B4C9F; font-size: 20px; margin-bottom: 20px; text-align: center; display: none;">تواصل معنا</h5>
+                        
+                        <div class="social-links" style="display: flex; gap: 20px; justify-content: center;">
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/share/17a3zSSnzs/?mibextid=wwXIfr" 
+                               target="_blank"
+                               style="display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background-color: #1877F2; color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s; font-size: 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/23566271103" 
+                               target="_blank"
+                               style="display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background-color: #25D366; color: white; border-radius: 50%; text-decoration: none; transition: all 0.3s; font-size: 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
                         </div>
                         
-                    </div>
-
-                    <div class="contact-item" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
-                        <i class="fas fa-envelope" style="font-size: 24px; color: #2B4C9F; margin-right: 15px;"></i>
-                        <div>
-                            <h5 class="fr" style="margin: 0; color: #2B4C9F;">Email</h5>
-                            <h5 class="en" style="display:none;">Email</h5>
-                            <p style="margin: 0;"><a href="mailto:bureau@rfet-td.org" style="text-decoration: none; color: #333;">bureau@rfet-td.org</a></p>
-                            <!-- <p style="margin: 0;"><a href="mailto:contact@rfet.org" style="text-decoration: none; color: #333;">contact@rfet.org</a></p> -->
-                        </div>
-                    </div>
-
-                    <div class="social-links" style="margin-top: 20px;">
-                        <a href="#" style="color: #2B4C9F; font-size: 20px; margin-right: 10px; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: #2B4C9F; font-size: 20px; margin-right: 10px; text-decoration: none;"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" style="color: #2B4C9F; font-size: 20px; margin-right: 10px; text-decoration: none;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: #2B4C9F; font-size: 20px; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                        <p class="fr" style="color: #666; font-size: 14px; text-align: center; margin-top: 15px;">
+                            Suivez-nous sur les réseaux sociaux
+                        </p>
+                        <p class="en" style="color: #666; font-size: 14px; text-align: center; margin-top: 15px; display: none;">
+                            Follow us on social media
+                        </p>
+                        <p class="ar" style="color: #666; font-size: 14px; text-align: center; margin-top: 15px; display: none;">
+                            تابعنا على وسائل التواصل الاجتماعي
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Colonne droite : Contact par email -->
+            <!-- Colonne droite : Contact par email et réseaux sociaux -->
             <div class="col-md-6" style="flex: 1; min-width: 300px;">
-                <div class="contact-form" style="background: white; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                    <h4 class="fr" style="color: #2B4C9F; font-size: 22px;">Envoyez-nous un message</h4>
-                    <h4 class="en" style="display:none;">Send us a message</h4>
-                    <p class="fr" style="color: #333;">Clique sur le bouton ci-dessous pour nous écrire directement par email.<br>Nous te répondrons dans les plus brefs délais.</p>
-                    <p class="en" style="display:none;">Click below to send us an email.<br>We will reply as soon as possible.</p>
+                <div class="contact-form" style="background: white; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column;">
+                    <h4 class="fr" style="color: #2B4C9F; font-size: 24px; margin-bottom: 20px;">Envoyez-nous un message</h4>
+                    <h4 class="en" style="color: #2B4C9F; font-size: 24px; margin-bottom: 20px; display:none;">Send us a message</h4>
+                    <h4 class="ar" style="color: #2B4C9F; font-size: 24px; margin-bottom: 20px; display:none;">أرسل لنا رسالة</h4>
+                    
+                    <p class="fr" style="color: #333; margin-bottom: 30px; line-height: 1.6; font-size: 16px;">
+                        Clique sur le bouton ci-dessous pour nous écrire directement par email.<br>Nous te répondrons dans les plus brefs délais.
+                    </p>
+                    <p class="en" style="color: #333; margin-bottom: 30px; line-height: 1.6; font-size: 16px; display:none;">
+                        Click below to send us an email.<br>We will reply as soon as possible.
+                    </p>
+                    <p class="ar" style="color: #333; margin-bottom: 30px; line-height: 1.6; font-size: 16px; display:none;">
+                        انقر أدناه لترسل لنا بريدًا إلكترونيًا.<br>سنجيب في أقرب وقت ممكن.
+                    </p>
 
-                    <a href="mailto:bureau@rfet-td.org?subject=Demande d'information RFET&body=Bonjour, je souhaite obtenir plus d'informations sur vos activités."
-                       style="display: inline-block; background-color: #2B4C9F; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 15px; transition: 0.3s;">
-                        📧 Nous contacter par email
-                    </a>
+                    <div style="margin-bottom: 30px;">
+                        <a href="mailto:bureau@rfet-td.org?subject=Demande d'information RFET&body=Bonjour, je souhaite obtenir plus d'informations sur vos activités."
+                           class="fr"
+                           style="display: inline-flex; align-items: center; gap: 10px; background-color: #2B4C9F; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.3s; font-size: 16px; box-shadow: 0 4px 8px rgba(43, 76, 159, 0.3);">
+                            <i class="fas fa-envelope"></i>
+                            Nous contacter par email
+                        </a>
+                        
+                        <a href="mailto:bureau@rfet-td.org?subject=Information request RFET&body=Hello, I would like to get more information about your activities."
+                           class="en"
+                           style="display: none; align-items: center; gap: 10px; background-color: #2B4C9F; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.3s; font-size: 16px; box-shadow: 0 4px 8px rgba(43, 76, 159, 0.3);">
+                            <i class="fas fa-envelope"></i>
+                            Contact us by email
+                        </a>
+                        
+                        <a href="mailto:bureau@rfet-td.org?subject=طلب معلومات من RFET&body=مرحباً، أرغب في الحصول على المزيد من المعلومات حول أنشطتكم."
+                           class="ar"
+                           style="display: none; align-items: center; gap: 10px; background-color: #2B4C9F; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.3s; font-size: 16px; box-shadow: 0 4px 8px rgba(43, 76, 159, 0.3);">
+                            <i class="fas fa-envelope"></i>
+                            اتصل بنا عبر البريد الإلكتروني
+                        </a>
+                    </div>
+
+                    <!-- Section Suivez-nous sur Facebook -->
+                    <div style="margin-top: auto; padding-top: 30px; border-top: 1px solid #eee;">
+                        <h5 class="fr" style="color: #2B4C9F; font-size: 20px; margin-bottom: 15px;">Suivez-nous sur Facebook</h5>
+                        <h5 class="en" style="color: #2B4C9F; font-size: 20px; margin-bottom: 15px; display: none;">Follow us on Facebook</h5>
+                        <h5 class="ar" style="color: #2B4C9F; font-size: 20px; margin-bottom: 15px; display: none;">تابعنا على فيسبوك</h5>
+                        
+                        <p class="fr" style="color: #666; font-size: 14px; margin-bottom: 20px; line-height: 1.5;">
+                            Restez informé de nos dernières actualités et événements
+                        </p>
+                        <p class="en" style="color: #666; font-size: 14px; margin-bottom: 20px; line-height: 1.5; display: none;">
+                            Stay updated with our latest news and events
+                        </p>
+                        <p class="ar" style="color: #666; font-size: 14px; margin-bottom: 20px; line-height: 1.5; display: none;">
+                            ابق على اطلاع بآخر أخبارنا وفعالياتنا
+                        </p>
+
+                        <a href="https://www.facebook.com/share/17a3zSSnzs/?mibextid=wwXIfr" 
+                           target="_blank"
+                           style="display: inline-flex; align-items: center; gap: 10px; background-color: #1877F2; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: all 0.3s; font-size: 16px; box-shadow: 0 4px 8px rgba(24, 119, 242, 0.3);">
+                            <i class="fab fa-facebook-f"></i>
+                            <span class="fr">Suivre sur Facebook</span>
+                            <span class="en" style="display: none">Follow on Facebook</span>
+                            <span class="ar" style="display: none">تابع على فيسبوك</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 <footer>
 <div class="footer-content">
@@ -394,6 +624,7 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 <h3>RFET</h3>
 <p class="fr">Le Réseau des Femmes Entrepreneures du Tchad œuvre pour l'autonomisation économique des femmes à travers l'entrepreneuriat, la formation et l'innovation. Ensemble, construisons un Tchad prospère et inclusif.</p>
 <p class="en" style="display:none">The Network of Women Entrepreneurs of Chad works for women's economic empowerment through entrepreneurship, training and innovation. Together, let's build a prosperous and inclusive Chad.</p>
+<p class="ar" style="display:none">تعمل شبكة رائدات الأعمال في تشاد من أجل تمكين المرأة اقتصاديًا من خلال ريادة الأعمال والتدريب والابتكار. معًا، لنبني تشاد مزدهرة وشاملة للجميع.</p>
 <div class="social-icons">
 <a href="#" class="social-icon">📘</a>
 <a href="#" class="social-icon">🔗</a>
@@ -404,40 +635,44 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 <div class="footer-links">
 <h4 class="fr">Liens Rapides</h4>
 <h4 class="en" style="display:none">Quick Links</h4>
+<h4 class="ar" style="display:none">روابط سريعة</h4>
 <ul>
-<li><a href="#accueil" class="fr">Accueil</a><a href="#accueil" class="en" style="display:none">Home</a></li>
-<li><a href="#apropos" class="fr">À propos</a><a href="#apropos" class="en" style="display:none">About</a></li>
-<li><a href="#projets" class="fr">Nos Projets</a><a href="#projets" class="en" style="display:none">Our Projects</a></li>
-<li><a href="#objectifs" class="fr">Nos Objectifs</a><a href="#objectifs" class="en" style="display:none">Our Objectives</a></li>
-<li><a href="#contact" class="fr">Contact</a><a href="#contact" class="en" style="display:none">Contact</a></li>
+<li><a href="#accueil" class="fr">Accueil</a><a href="#accueil" class="en" style="display:none">Home</a><a href="#accueil" class="ar" style="display:none">الرئيسية</a></li>
+<li><a href="#apropos" class="fr">À propos</a><a href="#apropos" class="en" style="display:none">About</a><a href="#apropos" class="ar" style="display:none">من نحن</a></li>
+<li><a href="#projets" class="fr">Nos Projets</a><a href="#projets" class="en" style="display:none">Our Projects</a><a href="#projets" class="ar" style="display:none">مشاريعنا</a></li>
+<li><a href="#objectifs" class="fr">Nos Objectifs</a><a href="#objectifs" class="en" style="display:none">Our Objectives</a><a href="#objectifs" class="ar" style="display:none">أهدافنا</a></li>
+<li><a href="#contact" class="fr">Contact</a><a href="#contact" class="en" style="display:none">Contact</a><a href="#contact" class="ar" style="display:none">اتصل بنا</a></li>
 </ul>
 </div>
 <div class="footer-links">
 <h4 class="fr">Secteurs</h4>
 <h4 class="en" style="display:none">Sectors</h4>
+<h4 class="ar" style="display:none">القطاعات</h4>
 <ul>
-<li><a href="#" class="fr">Commerce</a><a href="#" class="en" style="display:none">Trade</a></li>
-<li><a href="#" class="fr">Industrie</a><a href="#" class="en" style="display:none">Industry</a></li>
-<li><a href="#" class="fr">Agriculture</a><a href="#" class="en" style="display:none">Agriculture</a></li>
-<li><a href="#" class="fr">Artisanat</a><a href="#" class="en" style="display:none">Crafts</a></li>
-<li><a href="#" class="fr">Numérique</a><a href="#" class="en" style="display:none">Digital</a></li>
+<li><a href="#" class="fr">Commerce</a><a href="#" class="en" style="display:none">Trade</a><a href="#" class="ar" style="display:none">التجارة</a></li>
+<li><a href="#" class="fr">Industrie</a><a href="#" class="en" style="display:none">Industry</a><a href="#" class="ar" style="display:none">الصناعة</a></li>
+<li><a href="#" class="fr">Agriculture</a><a href="#" class="en" style="display:none">Agriculture</a><a href="#" class="ar" style="display:none">الزراعة</a></li>
+<li><a href="#" class="fr">Artisanat</a><a href="#" class="en" style="display:none">Crafts</a><a href="#" class="ar" style="display:none">الحرف</a></li>
+<li><a href="#" class="fr">Numérique</a><a href="#" class="en" style="display:none">Digital</a><a href="#" class="ar" style="display:none">الرقمية</a></li>
 </ul>
 </div>
 <div class="footer-links">
 <h4 class="fr">Ressources</h4>
 <h4 class="en" style="display:none">Resources</h4>
+<h4 class="ar" style="display:none">الموارد</h4>
 <ul>
-<li><a href="#" class="fr">Documentation</a><a href="#" class="en" style="display:none">Documentation</a></li>
-<li><a href="#" class="fr">Formations</a><a href="#" class="en" style="display:none">Training</a></li>
-<li><a href="#" class="fr">Opportunités</a><a href="#" class="en" style="display:none">Opportunities</a></li>
-<li><a href="#" class="fr">Partenariats</a><a href="#" class="en" style="display:none">Partnerships</a></li>
-<li><a href="#" class="fr">Actualités</a><a href="#" class="en" style="display:none">News</a></li>
+<li><a href="#" class="fr">Documentation</a><a href="#" class="en" style="display:none">Documentation</a><a href="#" class="ar" style="display:none">الوثائق</a></li>
+<li><a href="#" class="fr">Formations</a><a href="#" class="en" style="display:none">Training</a><a href="#" class="ar" style="display:none">التدريبات</a></li>
+<li><a href="#" class="fr">Opportunités</a><a href="#" class="en" style="display:none">Opportunities</a><a href="#" class="ar" style="display:none">الفرص</a></li>
+<li><a href="#" class="fr">Partenariats</a><a href="#" class="en" style="display:none">Partnerships</a><a href="#" class="ar" style="display:none">الشراكات</a></li>
+<li><a href="#" class="fr">Actualités</a><a href="#" class="en" style="display:none">News</a><a href="#" class="ar" style="display:none">الأخبار</a></li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
 <p class="fr">&copy; 2025 RFET - Tous droits réservés | Réseau des Femmes Entrepreneures du Tchad</p>
 <p class="en" style="display:none">&copy; 2025 RFET - All rights reserved | Network of Women Entrepreneurs of Chad</p>
+<p class="ar" style="display:none">&copy; 2025 RFET - جميع الحقوق محفوظة | شبكة رائدات الأعمال في تشاد</p>
 </div>
 </footer>
 
@@ -445,26 +680,48 @@ footer{background:var(--dark);color:white;padding:80px 50px 40px}
 
 <script>
 let currentLang = 'fr';
-let slideIndex = 0;
 
-function toggleLang() {
+function changeLanguage(lang) {
     const frElements = document.querySelectorAll('.fr');
     const enElements = document.querySelectorAll('.en');
+    const arElements = document.querySelectorAll('.ar');
+    const langOptions = document.querySelectorAll('.lang-option');
     
-    if (currentLang === 'fr') {
-        // Passer à l'anglais
-        frElements.forEach(el => el.style.display = 'none');
-        enElements.forEach(el => el.style.display = 'block');
-        document.querySelector('.lang-switcher').textContent = '🇫🇷 FR';
-        currentLang = 'en';
-    } else {
-        // Revenir au français
-        enElements.forEach(el => el.style.display = 'none');
+    // Masquer tous les éléments de langue
+    frElements.forEach(el => el.style.display = 'none');
+    enElements.forEach(el => el.style.display = 'none');
+    arElements.forEach(el => el.style.display = 'none');
+    
+    // Afficher les éléments de la langue sélectionnée
+    if (lang === 'fr') {
         frElements.forEach(el => el.style.display = 'block');
-        document.querySelector('.lang-switcher').textContent = '🇬🇧 EN';
-        currentLang = 'fr';
+        document.querySelector('.current-flag').textContent = '🇫🇷';
+        document.querySelector('.current-lang').textContent = 'FR';
+        document.body.classList.remove('ar');
+    } else if (lang === 'en') {
+        enElements.forEach(el => el.style.display = 'block');
+        document.querySelector('.current-flag').textContent = '🇬🇧';
+        document.querySelector('.current-lang').textContent = 'EN';
+        document.body.classList.remove('ar');
+    } else if (lang === 'ar') {
+        arElements.forEach(el => el.style.display = 'block');
+        document.querySelector('.current-flag').textContent = '🇸🇦';
+        document.querySelector('.current-lang').textContent = 'AR';
+        document.body.classList.add('ar');
     }
+    
+    // Mettre à jour les classes actives
+    langOptions.forEach(option => {
+        option.classList.remove('active');
+        if (option.getAttribute('data-lang') === lang) {
+            option.classList.add('active');
+        }
+    });
+    
+    currentLang = lang;
 }
+
+let slideIndex = 0;
 
 function changeSlide() {
     const slides = document.querySelectorAll('.hero-slide');
@@ -527,4 +784,3 @@ if (partnersTrack) {
 
 </body>
 </html>
-
